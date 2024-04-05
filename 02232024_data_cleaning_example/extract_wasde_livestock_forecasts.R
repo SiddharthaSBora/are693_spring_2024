@@ -37,7 +37,7 @@ wasde_1999_urls<-c("https://downloads.usda.library.cornell.edu/usda-esmis/files/
 
 
 # let's create a directory for keeping files
-file_destination="./data/wasde_1999/"
+file_destination <- "./data/wasde_1999/"
 dir.create(file_destination, showWarnings = FALSE)
 
 # this little function is a wrapper to download.file, but it also extracts the file name, and stores
@@ -56,7 +56,7 @@ wasde_1999_urls%>%
 # Now the download is over, let's try to clean the data from the PDFs
 file_names<-list.files(file_destination, ".pdf", full.names = T)
 
-
+file<-file_names[1]
 
 # This function will read a monthly report and spit out what we need from livestock
 # price table
@@ -68,7 +68,7 @@ extract_monthly_livestock_prices<-function(file)
     # Extract the table from PDF
     mydata<-pdf_text(file) # read the whole pdf doc
     page_number<-which(str_detect(mydata, "U.S. Quarterly Animal Product Production 1/")) # find the page number
-    mydata=tibble(mystring=as.vector(str_split(mydata[page_number], "\n", simplify = T)))
+    mydata<-tibble(mystring=as.vector(str_split(mydata[page_number], "\n", simplify = T)))
     
     start_row<-mydata %>%
       mutate(mystring=trimws(mystring))%>%

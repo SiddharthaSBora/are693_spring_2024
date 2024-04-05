@@ -4,3 +4,6 @@
 .Ruserdata
 data/
 .DS_Store
+*.pdf
+*.png
+03082024_mobility_data/
